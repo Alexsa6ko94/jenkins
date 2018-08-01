@@ -10,4 +10,7 @@
 *.sig
 
 pkg/
-src/
+bin/*
+dist/*
+reports*
+docs/*
