@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<<<<<<< HEAD
 <project name="Rectangle-Build" default="main" basedir=".">
   <property environment="env"/>
 
@@ -7,12 +8,21 @@
   <property name="src.dir" location="src" />
   <property name="build.dir" location="bin" />
   <property name="dist.dir" location="dist" />
+=======
+<project name="Rectangle-Test" default="main" basedir=".">
+  <property environment="env"/>
+
+  <property name="src.dir" location="src" />
+  <property name="build.dir" location="bin" />
+  <property name="report.dir" location="reports" />
+>>>>>>> e8c28aa31f925625fc41774b250d215e9450147c
 
   <path id="class.path">
     <pathelement location="./lib/junit-4.10.jar" />
     <pathelement location="${build.dir}" />
   </path>
 
+<<<<<<< HEAD
   <!-- Deletes the existing build, docs and dist directory-->
   <target name="clean">
     <delete dir="${build.dir}" />
@@ -27,11 +37,25 @@
 
   <!-- Compiles the java code (including the usage of library for JUnit -->
   <target name="compile" depends="clean, makedir">
+=======
+  <target name="clean">
+    <delete dir="${build.dir}"  />
+    <delete dir="${report.dir}" />
+  </target>
+
+  <target name="makedir" depends="clean">
+    <mkdir dir="${build.dir}" />
+    <mkdir dir="${report.dir}" />
+  </target>
+
+  <target name="compile" depends="makedir">
+>>>>>>> e8c28aa31f925625fc41774b250d215e9450147c
     <javac srcdir="${src.dir}" destdir="${build.dir}">
       <classpath refid="class.path" />
     </javac>
   </target>
 
+<<<<<<< HEAD
   <!--Creates the deployable jar file  -->
   <target name="jar" depends="compile">
     <jar destfile="${dist.dir}\rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar" basedir="${build.dir}">
@@ -45,4 +69,18 @@
     <description>Main target</description>
   </target>
 
+=======
+  <target name="test" depends="clean, makedir, compile">
+    <junit printsummary="yes" fork="true">
+      <classpath refid="class.path" />
+      <test name="RectangleTest" todir="${report.dir}" outfile="result">
+        <formatter type="xml" />
+      </test>
+    </junit>
+  </target>
+
+  <target name="main" depends="test">
+    <description>Main target</description>
+  </target>
+>>>>>>> e8c28aa31f925625fc41774b250d215e9450147c
 </project>
