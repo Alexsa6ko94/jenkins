@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'slave_node1'
+        label 'master'
     }
     
     stages {
