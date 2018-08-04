@@ -10,6 +10,7 @@
 
   <path id="class.path">
     <pathelement location="/opt/ant/lib/junit-4.12.jar" />
+    <pathelement location="./lib/hamcrest-core-1.3.jar" />
     <pathelement location="${build.dir}" />
   </path>
 
