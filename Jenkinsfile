@@ -1,11 +1,12 @@
 pipeline {
     agent none
 
-    def getJenkinsMaster() {
-        return env.BUILD_URL.split('/')[2].split(':')[0]
-    }
-
     stages {
+        def getJenkinsMaster() {
+            return env.BUILD_URL.split('/')[2].split(':')[0]
+        }
+
+
         stage('Unit Tests') {
             agent { 
                 label 'apache'
