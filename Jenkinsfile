@@ -1,6 +1,10 @@
 pipeline {
     agent none
-    
+
+    def getJenkinsMaster() {
+        return env.BUILD_URL.split('/')[2].split(':')[0]
+    }
+
     stages {
         stage('Unit Tests') {
             agent { 
@@ -46,8 +50,9 @@ pipeline {
             }
 
             steps {
-                sh "wget $JENKINS_IP/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
-                sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 5 6"
+                echo getJenkinsMaster()
+                //sh "wget $JENKINS_IP/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
+                //sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 5 6"
             }
         }
 
@@ -57,8 +62,8 @@ pipeline {
             }
         
             steps {
-                sh "wget $JENKINS_IP/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
-                sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 5 6"
+                //sh "wget $JENKINS_IP/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
+                //sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 5 6"
             }
         }
      
@@ -67,7 +72,7 @@ pipeline {
                 label 'apache'
             }
             steps {
-                sh "cp /var/www/html/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar /var/www/html/rectangles/green/rectangle_${env.BUILD_NUMBER}.jar"
+                //sh "cp /var/www/html/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar /var/www/html/rectangles/green/rectangle_${env.BUILD_NUMBER}.jar"
             }
         }
     }
