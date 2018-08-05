@@ -46,7 +46,7 @@ pipeline {
             }
 
             steps {
-                sh "wget http://34.228.192.22/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
+                sh "wget $JENKINS_IP/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
                 sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 5 6"
             }
         }
@@ -57,7 +57,7 @@ pipeline {
             }
         
             steps {
-                sh "wget http://34.228.192.22/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
+                sh "wget $JENKINS_IP/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
                 sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 5 6"
             }
         }
