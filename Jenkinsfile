@@ -47,7 +47,7 @@ pipeline {
             }
 
             steps {
-                sh "wget http://34.229.233.217/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
+                sh "wget iliya-belichev-pontica-d0fa788d1.mylabserver.com/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
                 sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 5 6"
             }
         }
@@ -58,7 +58,7 @@ pipeline {
             }
         
             steps {
-                sh "wget http://34.229.233.217/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
+                sh "wget iliya-belichev-pontica-d0fa788d1.mylabserver.com/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
                 sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 5 6"
             }
         }
