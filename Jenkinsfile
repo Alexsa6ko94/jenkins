@@ -100,6 +100,8 @@ pipeline {
                 sh 'git pull origin'
                 echo "Checking Out Master Branch"
                 sh 'git checkout master'
+                echo "Git merge master"
+                sh 'git pull origin'
                 echo "Merging Dev into Master Branch"
                 sh 'git merge dev'
                 echo "Pushing to Origin Master"
