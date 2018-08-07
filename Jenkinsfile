@@ -78,7 +78,7 @@ pipeline {
             }
 
             steps {
-                sh "cp /var/www/html/rectangles/all/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar /var/www/html/rectangles/green/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar"
+                sh "cp /var/www/html/rectangles/all/${env.BRANCH_NAME}/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar /var/www/html/rectangles/green/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar"
             }
         }
 
@@ -97,11 +97,9 @@ pipeline {
                 echo "Checking Out Dev Branch"
                 sh 'git checkout dev'
                 echo "Git pull"
-                sh 'git pull origin dev'
+                sh 'git pull origin'
                 echo "Checking Out Master Branch"
                 sh 'git checkout master'
-                echo "Git pull"
-                sh 'git pull origin master'
                 echo "Merging Dev into Master Branch"
                 sh 'git merge dev'
                 echo "Pushing to Origin Master"
