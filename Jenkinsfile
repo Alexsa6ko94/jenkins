@@ -37,7 +37,8 @@ pipeline {
             }
 
             steps {
-                sh "cp dist/rectangle_${env.BUILD_NUMBER}.jar /var/www/html/rectangles/all/"
+                sh "mkdir /var/www/html/rectangles/all/${env.BRANCH_NAME}"
+                sh "cp dist/rectangle_${env.BUILD_NUMBER}.jar /var/www/html/rectangles/all/${env.BRANCH_NAME}/"
             }
         }
 
@@ -47,7 +48,7 @@ pipeline {
             }
 
             steps {
-                sh "wget iliya-belichev-pontica-d0fa788d1.mylabserver.com/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
+                sh "wget iliya-belichev-pontica-d0fa788d1.mylabserver.com/rectangles/all/${env.BRANCH_NAME}/rectangle_${env.BUILD_NUMBER}.jar"
                 sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 5 6"
             }
         }
@@ -58,7 +59,7 @@ pipeline {
             }
         
             steps {
-                sh "wget iliya-belichev-pontica-d0fa788d1.mylabserver.com/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar"
+                sh "wget iliya-belichev-pontica-d0fa788d1.mylabserver.com/rectangles/all/${env.BRANCH_NAME}/rectangle_${env.BUILD_NUMBER}.jar"
                 sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 5 6"
             }
         }
@@ -69,11 +70,34 @@ pipeline {
             }
 
             when {
-                branch 'dev'
+                branch 'master'
             }
 
             steps {
                 sh "cp /var/www/html/rectangles/all/rectangle_${env.BUILD_NUMBER}.jar /var/www/html/rectangles/green/rectangle_${env.BUILD_NUMBER}.jar"
+            }
+        }
+
+        stage('Promote Dev to Master Banch') {
+            agent {
+                label 'apache'
+            }
+
+            when {
+                branch 'dev'
+            }
+
+            steps {
+                echo "Stashing Any Local Changes"
+                sh 'git stash'
+                echo "Checking Out Dev Branch"
+                sh 'git checkout dev'
+                echo "Checking Out Master Branch"
+                sh 'git checkout master'
+                echo "Merging Dev into Master Branch"
+                sh 'git merge dev'
+                echo "Pushing to Origin Master"
+                sh 'git push origin master'
             }
         }
     }
