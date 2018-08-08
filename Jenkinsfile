@@ -7,6 +7,14 @@ pipeline {
 
     stages {
 
+        stage('Say Hello') {
+            agent any
+
+            steps {
+                groovyHello 'Groovy Master!'
+            }
+        }
+
         stage('Unit Tests') {
             agent { 
                 label 'apache'
