@@ -15,6 +15,21 @@ pipeline {
             }
         }
 
+        stage('Git info:') {
+            agent any
+            
+            steps {
+        
+                echo "My Branch Name: ${env.BRANCH_NAME}"
+
+                script {
+                    def myLib = new aboyanov.git.gitStuffs();
+
+                    echo "My Commit: ${myLib.gitCommit("${env.WORKSPACE}/.git")}"
+                }
+            }
+        }
+
         stage('Unit Tests') {
             agent { 
                 label 'apache'
